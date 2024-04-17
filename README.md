@@ -5,10 +5,10 @@ Cords-Semantics is a Python library designed for tagging the artifacts of MLflow
 
 ## Features
 
-- **Tagging Artifacts**: Automatically tag MLflow run artifacts with relevant semantic information.
-- **Semantic Descriptions**: Generate semantic descriptions for MLflow artifacts using CORDS ontology.
-- **Data Interpretation**: Enhance the interpretability of MLflow run data.
-- **Integration with IDSA**: Prepare and format data for sharing within an IDSA-compliant ecosystem.
+- **Tagging Artifacts**: Provide the CORDS vocab in as a set of MLFlow tags to be used during the training.
+- **MLFlow MetaData Extractions**: Provide interfaces to extract MLflow tags and other metadata to a JSON structure 
+- **Generate Semantic Description**: Automatically generate semantic descriptions for MLflow artifacts.
+
 
 
 ## Build Project
@@ -20,6 +20,13 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 
 # Use poetry to build the project. Build files are in dist folder
 poetry build
+```
 
+## Installation
 
-# Installation
+Install from the built filename.gz from the dist folder
+```bash
+cd dist
+pip install cords_semantics-0.1.0.tar.gz
+```
+
