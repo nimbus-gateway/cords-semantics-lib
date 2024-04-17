@@ -30,3 +30,54 @@ cd dist
 pip install cords_semantics-0.1.0.tar.gz
 ```
 
+
+## How to use
+
+CORDS tags collections can be directly imported at MLFlow experiments. These Tags can be set based on the scenario. Following is an example of using CORDS vocabulary tags for loging after an experiment run is finished. 
+
+```python
+#Importing CORDS Tags
+import cords_semantics.tags as cords_tags
+
+with mlflow.start_run(run_name = run_name) as mlflow_run:
+    mlflow.set_experiment_tag("second best_model", "K-Neighbors Regressor")
+    mlflow.set_tag(cords_tags.CORDS_RUN, mlflow_run_id)
+    mlflow.set_tag(cords_tags.CORDS_RUN_EXECUTES, "K-Neighbors Regressor")
+    mlflow.set_tag(cords_tags.CORDS_IMPLEMENTATION, "python")
+    mlflow.set_tag(cords_tags.CORDS_SOFTWARE, "sklearn")
+    
+    mlflow.sklearn.log_model(models['K-Neighbors Regressor'], "knnmodel")
+        
+    mlflow.log_metric("test_RMSE", rmse_scores.loc[rmse_scores['Model Name'] == 'K-Neighbors Regressor', 'RMSE_Score'].values[0])
+    mlflow.log_metric("test_MAE", mae_scores.loc[mae_scores['Model Name'] == 'K-Neighbors Regressor', 'MAE_Score'].values[0])
+    mlflow.log_metric("test_R2_Score", r2_scores.loc[r2_scores['Model Name'] == 'K-Neighbors Regressor', 'R2_Score'].values[0])   
+    
+    mlflow.log_input(dataset, context="training")
+    
+    mlflow_run_id = mlflow_run.info.run_id
+    print("MLFlow Run ID: ", mlflow_run_id)
+```
+
+CORDS semantic manager library can be then used to extract and generate the semantic defintion for an experiment.
+
+
+```python
+
+from cords_semantics.semantics import MlSemanticManager
+from cords_semantics.mlflow import extract_mlflow_semantics, convert_tags_to_dictionary
+
+semantic_manager = MlSemanticManager()
+
+# use CORDS MLFlow helpers to extract tag values of an experiment run
+mflow_tags = extract_mlflow_semantics(mlflow_run_id)
+print("tags extracted from mlflow: ", mflow_tags)
+
+mlflow_semantics_dictionary = convert_tags_to_dictionary(mflow_tags)
+print("semantic in a dictionary: ", mlflow_semantics_dictionary)
+
+# generating semantic model and serializing it to RDF/XML format
+semantic_manager.create_model_semantics(mlflow_semantics_dictionary)
+
+semantic_manager.serialize_model_semantics("/location_of_the_file/lib_output.rdf")
+
+```
