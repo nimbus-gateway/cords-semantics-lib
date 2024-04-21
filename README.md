@@ -1,6 +1,6 @@
 # Cords-Semantics
 
-Cords-Semantics is a Python library designed for tagging the artifacts of MLflow runs and generating semantic descriptions for artifacts using the ontology provided by CORDS. This library helps interpret and utilize data from MLflow runs more effectively in machine learning projects, and prepares the assets to be shared in an IDSA (International Data Spaces Association) ecosystem.
+Cords-Semantics is a Python library designed for tagging the artifacts generated during MLflow runs and creating their semantic descriptions. It utlizes CORDS Ontology[https://cords.ie/assets/cords_ml_ontology.html] for Machine Learning. This library helps interpret the meta data of machine learning artifiacts in more meanigful way, and prepares the assets to be shared using IDSA protocol. 
 
 
 ## Features
@@ -39,8 +39,12 @@ CORDS tags collections can be directly imported at MLFlow experiments. These Tag
 #Importing CORDS Tags
 import cords_semantics.tags as cords_tags
 
+
 with mlflow.start_run(run_name = run_name) as mlflow_run:
+    mlflow_run_id = mlflow_run.info.run_id
+    
     mlflow.set_experiment_tag("second best_model", "K-Neighbors Regressor")
+    mlflow.set_tag("tag2", "K-Neighbors Regressor")
     mlflow.set_tag(cords_tags.CORDS_RUN, mlflow_run_id)
     mlflow.set_tag(cords_tags.CORDS_RUN_EXECUTES, "K-Neighbors Regressor")
     mlflow.set_tag(cords_tags.CORDS_IMPLEMENTATION, "python")
@@ -54,8 +58,9 @@ with mlflow.start_run(run_name = run_name) as mlflow_run:
     
     mlflow.log_input(dataset, context="training")
     
-    mlflow_run_id = mlflow_run.info.run_id
+    
     print("MLFlow Run ID: ", mlflow_run_id)
+
 ```
 
 CORDS semantic manager library can be then used to extract and generate the semantic defintion for an experiment.
