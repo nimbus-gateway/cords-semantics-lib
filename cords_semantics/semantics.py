@@ -1,5 +1,6 @@
 from rdflib import Graph, Namespace
 from rdflib.namespace import RDF
+from urllib.parse import urlparse
 
 #example meta data
 # meta_data = {
@@ -23,6 +24,8 @@ from rdflib.namespace import RDF
 # }
 
 
+
+
 class MlSemanticManager:
     """
     A manager class for handling ML semantic models using RDF data.
@@ -35,6 +38,8 @@ class MlSemanticManager:
         self.cords_namespace_uri = "http://www.w3.org/ns/cordsns#"
         self.scenario_uri = "http://example.org#"
         self.semantic_graph = None
+        self.ontology_graph = None
+        
 
     def set_cords_namespace_uri(self, uri: str):
         """
@@ -53,6 +58,45 @@ class MlSemanticManager:
             uri (str): The URI to set as the scenario namespace.
         """
         self.scenario_uri = uri
+
+    def is_url(self, string):
+        """
+        Check if a string is a valid URL.
+    
+        Args:
+        string (str): The string to check.
+    
+        Returns:
+        bool: True if the string is a valid URL, False otherwise.
+        """
+        try:
+            result = urlparse(string)
+            # Check if the parsing is successful and if scheme and netloc are present
+            return all([result.scheme, result.netloc])
+        except Exception:
+            return False
+
+    # Function to find a term's URI in the graph
+    def _find_term_uri(self, term, ontology_rdf_file='cordsml.rdf'):
+        graph = Graph()
+
+        # Load the RDF file into the graph
+        try:
+            graph.parse(ontology_rdf_file, format='application/rdf+xml')  # Adjust the format if necessary
+        except Exception as e:
+            print('Exception Occurred During Parsing')
+            print(e)
+        
+        for s, p, o in graph:
+            if term in s:
+                if self.is_url(s):
+                    return s
+                else:
+                    # this is a work around for not to cause any issues. 
+                    return self.cords_namespace_uri + term
+            elif term in o:
+                return o
+        return None
 
     def create_model_semantics(self, meta_data: dict) -> Graph:
         """
@@ -76,13 +120,16 @@ class MlSemanticManager:
                 for key in item:
                     if key == 'type':
                         identifier = item[key]
-                        g.add((ex[item[key]], RDF.type, cords[cls]))
+                        uri = self._find_term_uri(cls)
+                        g.add((ex[item[key]], RDF.type, uri))
                     else:
                         if isinstance(item[key], list):
                             for value in item[key]:
-                                g.add((ex[identifier], cords[key], ex[value]))
+                                uri = self._find_term_uri(key)
+                                g.add((ex[identifier], uri, ex[value]))
                         else:
-                            g.add((ex[identifier], cords[key], ex[item[key]]))
+                            uri = self._find_term_uri(key)
+                            g.add((ex[identifier], uri, ex[item[key]]))
 
         self.semantic_graph = g
         return g
