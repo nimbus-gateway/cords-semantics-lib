@@ -4,6 +4,7 @@ version = "0.2.1"
 description = ""
 authors = ["Tharindu Ranathunga <tharindu.ranathunga@mtu.ie>"]
 readme = "README.md"
+include = ["cords_semantics/data/*.rdf"]
 
 [tool.poetry.dependencies]
 python = "^3.8.10"
@@ -14,3 +15,4 @@ mlflow = "^2.12.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+

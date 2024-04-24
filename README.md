@@ -71,7 +71,7 @@ CORDS semantic manager library can be then used to extract and generate the sema
 from cords_semantics.semantics import MlSemanticManager
 from cords_semantics.mlflow import extract_mlflow_semantics, convert_tags_to_dictionary
 
-semantic_manager = MlSemanticManager()
+semantic_manager = MlSemanticManager('data/cordsml.rdf')
 
 # use CORDS MLFlow helpers to extract tag values of an experiment run
 mflow_tags = extract_mlflow_semantics(mlflow_run_id)

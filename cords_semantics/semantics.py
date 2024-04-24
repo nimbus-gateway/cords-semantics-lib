@@ -1,6 +1,7 @@
 from rdflib import Graph, Namespace
 from rdflib.namespace import RDF
 from urllib.parse import urlparse
+import importlib.resources
 
 #example meta data
 # meta_data = {
@@ -31,7 +32,7 @@ class MlSemanticManager:
     A manager class for handling ML semantic models using RDF data.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, ontology_path) -> None:
         """
         Initializes the MlSemanticManager with default namespace URIs.
         """
@@ -39,6 +40,7 @@ class MlSemanticManager:
         self.scenario_uri = "http://example.org#"
         self.semantic_graph = None
         self.ontology_graph = None
+        self.ontology_path = ontology_path
         
 
     def set_cords_namespace_uri(self, uri: str):
@@ -77,12 +79,13 @@ class MlSemanticManager:
             return False
 
     # Function to find a term's URI in the graph
-    def _find_term_uri(self, term, ontology_rdf_file='cordsml.rdf'):
+    def _find_term_uri(self, term):
         graph = Graph()
 
         # Load the RDF file into the graph
         try:
-            graph.parse(ontology_rdf_file, format='application/rdf+xml')  # Adjust the format if necessary
+            graph.parse(self.ontology_path, format='application/rdf+xml')  # Adjust the format if necessary
+            
         except Exception as e:
             print('Exception Occurred During Parsing')
             print(e)
@@ -143,3 +146,4 @@ class MlSemanticManager:
             form (str): The serialization format (e.g., 'xml', 'turtle').
         """
         self.semantic_graph.serialize(destination=destination, format=form)
+        
