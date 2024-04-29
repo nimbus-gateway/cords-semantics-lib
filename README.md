@@ -26,10 +26,16 @@ poetry build
 
 Install from the built filename.gz from the dist folder
 ```bash
-cd dist
-pip install cords_semantics-0.1.0.tar.gz
+pip dist/install cords_semantics-0.1.0.tar.gz
 ```
 
+
+## How to Test
+
+Run the unit tests provided in the tests/ folder
+```bash
+python3 -m unittest
+```
 
 ## How to use
 

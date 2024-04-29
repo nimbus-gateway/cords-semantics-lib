@@ -2,6 +2,7 @@ from rdflib import Graph, Namespace
 from rdflib.namespace import RDF
 from urllib.parse import urlparse
 import importlib.resources
+import json
 
 #example meta data
 # meta_data = {
@@ -52,6 +53,7 @@ class MlSemanticManager:
         """
         self.cords_namespace_uri = uri
 
+
     def set_scenario_namespace_uri(self, uri: str):
         """
         Sets the scenario namespace URI used in the RDF graph.
@@ -60,6 +62,7 @@ class MlSemanticManager:
             uri (str): The URI to set as the scenario namespace.
         """
         self.scenario_uri = uri
+
 
     def is_url(self, string):
         """
@@ -78,6 +81,7 @@ class MlSemanticManager:
         except Exception:
             return False
 
+
     # Function to find a term's URI in the graph
     def _find_term_uri(self, term):
         graph = Graph()
@@ -85,7 +89,7 @@ class MlSemanticManager:
         # Load the RDF file into the graph
         try:
             graph.parse(self.ontology_path, format='application/rdf+xml')  # Adjust the format if necessary
-            
+
         except Exception as e:
             print('Exception Occurred During Parsing')
             print(e)
@@ -100,6 +104,7 @@ class MlSemanticManager:
             elif term in o:
                 return o
         return None
+
 
     def create_model_semantics(self, meta_data: dict) -> Graph:
         """
@@ -136,6 +141,56 @@ class MlSemanticManager:
 
         self.semantic_graph = g
         return g
+    
+
+    def convert_to_json_ld(self):
+        """
+        creates a readable form of the semantic graph in json-ld format
+        
+        Returns:
+            Dictionary: json-ld in a dictionary  
+        """
+        serialized = self.semantic_graph.serialize(format='json-ld')
+        serialized = json.loads(serialized)
+        namespaces = {
+            "http://example.org" : "ex",
+            "http://www.w3.org/ns/mls": "mls",
+            "http://www.w3.org/ns/prov": "prov",
+            "http://www.w3.org/2004/02/skos/core": "core",
+            "http://www.w3.org/ns/dcat": "dcat",
+            "https://www.cords.ie/ontologies/cordsml": "cords"
+        }
+        output_json = {}
+        metadata = []
+        for sem in serialized:
+
+            temp_dict = {}
+            for item_key in sem: 
+                if item_key == "@id":
+                    temp_dict["@id"] = sem["@id"]
+                elif item_key == "@type":
+                    values = sem[item_key][0].split("#")
+                    temp_dict["@type"] = namespaces[values[0]] + ":" + values[1]
+                else:
+                    values = item_key.split("#")
+                    new_key = namespaces[values[0]] + ":" + values[1]
+                    new_value = sem[item_key][0]["@id"].split("#")[1]
+                    temp_dict[new_key] = {
+
+                    }
+                    temp_dict[new_key]["@type"] = "http://www.w3.org/2001/XMLSchema#string"
+                    temp_dict[new_key]["@value"] = new_value 
+                    
+            metadata.append(temp_dict)
+        
+        output_json["@context"] = {}
+        for space in namespaces:
+            output_json["@context"][namespaces[space]] = space
+        
+        output_json["cords:mlmetadata"] = metadata
+
+        return output_json
+
 
     def serialize_model_semantics(self, destination: str, form: str = "xml"):
         """
@@ -146,4 +201,9 @@ class MlSemanticManager:
             form (str): The serialization format (e.g., 'xml', 'turtle').
         """
         self.semantic_graph.serialize(destination=destination, format=form)
+   
+            
+
+
+
         
