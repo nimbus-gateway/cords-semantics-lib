@@ -26,7 +26,7 @@ poetry build
 
 Install from the built filename.gz from the dist folder
 ```bash
-pip dist/install cords_semantics-0.1.0.tar.gz
+pip install dist/cords_semantics-0.1.0.tar.gz
 ```
 
 
