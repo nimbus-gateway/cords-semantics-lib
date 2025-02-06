@@ -1,3 +1,4 @@
+CORDS_MLFLOW_FLAVOUR = "cords.MlFlow.Flavour"
 CORDS_VOCABULARYENCODINGSCHEME = "cords.VocabularyEncodingScheme"
 CORDS_VOCABULARYENCODINGSCHEME_DDC = "cords.VocabularyEncodingScheme.DDC"
 CORDS_VOCABULARYENCODINGSCHEME_IMT = "cords.VocabularyEncodingScheme.IMT"

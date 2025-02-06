@@ -44,7 +44,10 @@ CORDS tags collections can be directly imported at MLFlow experiments. These Tag
 ```python
 #Importing CORDS Tags
 import cords_semantics.tags as cords_tags
+import mlflow
 
+
+mlflow.set_tracking_uri("http://localhost:4000/")
 
 with mlflow.start_run(run_name = run_name) as mlflow_run:
     mlflow_run_id = mlflow_run.info.run_id
@@ -76,6 +79,9 @@ CORDS semantic manager library can be then used to extract and generate the sema
 
 from cords_semantics.semantics import MlSemanticManager
 from cords_semantics.mlflow import extract_mlflow_semantics, convert_tags_to_dictionary
+import mlflow
+
+mlflow.set_tracking_uri("http://localhost:4000/")
 
 semantic_manager = MlSemanticManager('data/cordsml.rdf')
 
@@ -90,5 +96,51 @@ print("semantic in a dictionary: ", mlflow_semantics_dictionary)
 semantic_manager.create_model_semantics(mlflow_semantics_dictionary)
 
 semantic_manager.serialize_model_semantics("/location_of_the_file/lib_output.rdf")
+
+```
+
+
+
+CORDS semantic manager library can be then used to serialize your meta data related to Federated Learning Service
+
+
+```python
+
+import unittest
+from rdflib import Graph, Namespace, RDF
+from rdflib.compare import graph_diff, isomorphic
+from semantics import MlSemanticManager, FlSemanticManager
+from cords_mlflow import convert_tags_to_dictionary
+import json
+
+tags = [{
+    "cords.FLSession.sessionID": "12345",
+    "cords.FLSession.sessionStartTime": "2024-01-30T12:00:00Z",
+    "cords.FLSession.sessionEndTime": "2024-01-30T15:00:00Z",
+    "cords.FLSession.numMinClients": 5,
+    "cords.FLSession.numMaxClients": 100,
+    "cords.FLSession.participationRatio": 1,
+    
+    "cords.FLAggregation.aggregationAlgorithm": "fed_avg",
+    "cords.FLAggregation.aggregationFrequency": 10,
+    
+    "cords.FLCommunication.communicationProtocol": "grpc",
+    "cords.FLCommunication.secureAggregationEnabled": True,
+    
+    "cords.FLSecurity.differentialPrivacyEnabled": False,
+    "cords.FLSecurity.encryptionMethod": "aes_256",
+    
+    "cords.FLTraining.trainingRounds": 50,
+    "cords.FLTraining.localEpochs": 5,
+    "cords.FLTraining.lossFunction": "categorical_crossentropy"
+}]
+
+
+FLmanager = FlSemanticManager("data/cords_federated_learning.rdf")
+tags_dictionary = convert_tags_to_dictionary(tags)
+
+semantics = FLmanager.create_fl_semantics(tags_dictionary)
+
+print(semantics)
 
 ```

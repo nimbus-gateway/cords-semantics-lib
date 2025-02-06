@@ -1,0 +1,493 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3.org/2002/07/owl"
+     xmlns:fl="http://www.w3.org/ns/cordsfl#"
+     xmlns:mls="http://www.w3.org/ns/mls#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:dcat="http://www.w3.org/ns/dcat#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <Ontology/>
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#hasParticipant -->
+
+    <ObjectProperty rdf:about="http://www.w3.org/ns/cordsfl#hasParticipant">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLSession"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/cordsfl#FLParticipant"/>
+        <rdfs:comment>FL Session includes participants.</rdfs:comment>
+        <rdfs:label>has participant</rdfs:label>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#hasSecurity -->
+
+    <ObjectProperty rdf:about="http://www.w3.org/ns/cordsfl#hasSecurity">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLService"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/cordsfl#FLSecurity"/>
+        <rdfs:comment>FL Service has security components.</rdfs:comment>
+        <rdfs:label>has security</rdfs:label>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#hasTraining -->
+
+    <ObjectProperty rdf:about="http://www.w3.org/ns/cordsfl#hasTraining">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLService"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/cordsfl#FLTraining"/>
+        <rdfs:comment>FL Service includes training components.</rdfs:comment>
+        <rdfs:label>has training</rdfs:label>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#hasTrainingRound -->
+
+    <ObjectProperty rdf:about="http://www.w3.org/ns/cordsfl#hasTrainingRound">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLSession"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/cordsfl#FLTrainingRound"/>
+        <rdfs:comment>FL Session includes training rounds.</rdfs:comment>
+        <rdfs:label>has training round</rdfs:label>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#offersSession -->
+
+    <ObjectProperty rdf:about="http://www.w3.org/ns/cordsfl#offersSession">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLService"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/cordsfl#FLSession"/>
+        <rdfs:comment>FL Service offers federated learning sessions.</rdfs:comment>
+        <rdfs:label>offers session</rdfs:label>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#producesModel -->
+
+    <ObjectProperty rdf:about="http://www.w3.org/ns/cordsfl#producesModel">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTrainingRound"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/cordsfl#FLModel"/>
+        <rdfs:comment>FL Training Round produces a FL Model.</rdfs:comment>
+        <rdfs:label>produces model</rdfs:label>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#usesAggregation -->
+
+    <ObjectProperty rdf:about="http://www.w3.org/ns/cordsfl#usesAggregation">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTraining"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/cordsfl#FLAggregation"/>
+        <rdfs:comment>FL Training uses FL Aggregation.</rdfs:comment>
+        <rdfs:label>uses aggregation</rdfs:label>
+    </ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#usesCommunication -->
+
+    <ObjectProperty rdf:about="http://www.w3.org/ns/cordsfl#usesCommunication">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLService"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/cordsfl#FLCommunications"/>
+        <rdfs:comment>FL Service uses communication protocols.</rdfs:comment>
+        <rdfs:label>uses communication</rdfs:label>
+    </ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#aggregationAlgorithm -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#aggregationAlgorithm">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLAggregation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#aggregationFrequency -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#aggregationFrequency">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLAggregation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#communicationProtocol -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#communicationProtocol">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLCommunications"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#differentialPrivacyEnabled -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#differentialPrivacyEnabled">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLSecurity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#droppedClients -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#droppedClients">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTrainingRound"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#encryptionMethod -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#encryptionMethod">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLSecurity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#globalModelVersion -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#globalModelVersion">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTrainingRound"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#localEpochs -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#localEpochs">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTraining"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#lossFunction -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#lossFunction">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTraining"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#modelID -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#modelID">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTrainingRound"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#modelType -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#modelType">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTrainingRound"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#numMaxClients -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#numMaxClients">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLSession"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>Data property numMaxClients for FLSession</rdfs:comment>
+        <rdfs:label>numMaxClients</rdfs:label>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#numMinClients -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#numMinClients">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLSession"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>Data property numMinClients for FLSession</rdfs:comment>
+        <rdfs:label>numMinClients</rdfs:label>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#numParticipatingClients -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#numParticipatingClients">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTrainingRound"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#participantComputeCapacity -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#participantComputeCapacity">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLParticipant"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#participantDeviceType -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#participantDeviceType">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLParticipant"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#participantID -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#participantID">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLParticipant"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#participationRatio -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#participationRatio">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLSession"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:comment>Data property participationRatio for FLSession</rdfs:comment>
+        <rdfs:label>participationRatio</rdfs:label>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#roundEndTime -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#roundEndTime">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTrainingRound"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#roundID -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#roundID">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTrainingRound"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#roundStartTime -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#roundStartTime">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTrainingRound"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#secureAggregationEnabled -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#secureAggregationEnabled">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLCommunications"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#sessionEndTime -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#sessionEndTime">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLSession"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>Data property sessionEndTime for FLSession</rdfs:comment>
+        <rdfs:label>sessionEndTime</rdfs:label>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#sessionID -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#sessionID">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLSession"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Data property sessionID for FLSession</rdfs:comment>
+        <rdfs:label>sessionID</rdfs:label>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#sessionStartTime -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#sessionStartTime">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLSession"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:comment>Data property sessionStartTime for FLSession</rdfs:comment>
+        <rdfs:label>sessionStartTime</rdfs:label>
+    </DatatypeProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#trainingRounds -->
+
+    <DatatypeProperty rdf:about="http://www.w3.org/ns/cordsfl#trainingRounds">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/cordsfl#FLTraining"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#FLAggregation -->
+
+    <Class rdf:about="http://www.w3.org/ns/cordsfl#FLAggregation">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/mls#Algorithm"/>
+        <rdfs:comment>The aggregation process for local models.</rdfs:comment>
+        <rdfs:label>Federated Learning Aggregation</rdfs:label>
+    </Class>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#FLCommunications -->
+
+    <Class rdf:about="http://www.w3.org/ns/cordsfl#FLCommunications">
+        <rdfs:comment>Communication protocols used in federated learning.</rdfs:comment>
+        <rdfs:label>Federated Learning Communications</rdfs:label>
+    </Class>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#FLModel -->
+
+    <Class rdf:about="http://www.w3.org/ns/cordsfl#FLModel">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/mls#Model"/>
+        <rdfs:comment>A model trained on a local client before aggregation or aggregrated global model.</rdfs:comment>
+        <rdfs:label>Federated Learning ML Model</rdfs:label>
+    </Class>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#FLParticipant -->
+
+    <Class rdf:about="http://www.w3.org/ns/cordsfl#FLParticipant">
+        <rdfs:comment>A set of servers/clients participating in the FL process.</rdfs:comment>
+        <rdfs:label>Federated Learning Participant</rdfs:label>
+    </Class>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#FLSecurity -->
+
+    <Class rdf:about="http://www.w3.org/ns/cordsfl#FLSecurity">
+        <rdfs:comment>Security mechanisms for federated learning.</rdfs:comment>
+        <rdfs:label>Federated Learning Security</rdfs:label>
+    </Class>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#FLService -->
+
+    <Class rdf:about="http://www.w3.org/ns/cordsfl#FLService">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/dcat#DataService"/>
+        <rdfs:comment>Services offered in the federated learning system.</rdfs:comment>
+        <rdfs:label>Federated Learning Service</rdfs:label>
+    </Class>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#FLSession -->
+
+    <Class rdf:about="http://www.w3.org/ns/cordsfl#FLSession">
+        <rdfs:comment>Represents a federated learning session.</rdfs:comment>
+        <rdfs:label>Federated Learning Session</rdfs:label>
+    </Class>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#FLTraining -->
+
+    <Class rdf:about="http://www.w3.org/ns/cordsfl#FLTraining">
+        <rdfs:comment>The training process in federated learning.</rdfs:comment>
+        <rdfs:label>Federated Learning Training</rdfs:label>
+    </Class>
+    
+
+
+    <!-- http://www.w3.org/ns/cordsfl#FLTrainingRound -->
+
+    <Class rdf:about="http://www.w3.org/ns/cordsfl#FLTrainingRound">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/mls#Run"/>
+        <rdfs:comment>A single round of training in the federated learning process.</rdfs:comment>
+        <rdfs:label>Federated Learning Training Round</rdfs:label>
+    </Class>
+    
+
+
+    <!-- http://www.w3.org/ns/dcat#DataService -->
+
+    <Class rdf:about="http://www.w3.org/ns/dcat#DataService"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#Algorithm -->
+
+    <Class rdf:about="http://www.w3.org/ns/mls#Algorithm"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#Model -->
+
+    <Class rdf:about="http://www.w3.org/ns/mls#Model"/>
+    
+
+
+    <!-- http://www.w3.org/ns/mls#Run -->
+
+    <Class rdf:about="http://www.w3.org/ns/mls#Run"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+
