@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cords-semantics"
-version = "0.2.2"
+version = "0.2.3"
 description = ""
 authors = ["Tharindu Ranathunga <tharindu.ranathunga@mtu.ie>"]
 readme = "README.md"
